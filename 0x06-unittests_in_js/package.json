@@ -1,0 +1,27 @@
+{
+  "name": "alx-backend-javascript",
+  "version": "1.0.0",
+  "description": "A project focused on backend JavaScript development with unit testing using Mocha, Chai, and Sinon.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "keywords": [
+    "backend",
+    "javascript",
+    "unit-testing",
+    "mocha",
+    "chai",
+    "sinon"
+  ],
+  "author": "victor paul",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "sinon": "^15.2.0"
+  }
+}
