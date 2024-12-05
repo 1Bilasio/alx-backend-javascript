@@ -1,25 +1,43 @@
-const { expect } = require('chai');
-const request = require('request');
+const request = require("request");
+const {describe, it} = require("mocha");
+const expect = require("chai").expect;
 
-describe('Cart page', () => {
-  it('should return correct status code when :id is a number', (done) => {
-    request('http://localhost:7865/cart/12', (error, response) => {
-      expect(response.statusCode).to.equal(200);
-      done();
+describe("Index page", function() {
+    const options = {
+	url: "http://localhost:7865/",
+	method: "GET"
+    }
+    it("check correct status code", function(done) {
+	request(options, function(err, res, body) {
+	    expect(res.statusCode).to.equal(200);
+	    done();
+	});
     });
-  });
+    it("check correct content", function(done) {
+	request(options, function(err, res, body) {
+	    expect(body).to.equal("Welcome to the payment system");
+	    done();
+	});
+    });
+});
 
-  it('should return correct result when :id is a number', (done) => {
-    request('http://localhost:7865/cart/12', (error, response, body) => {
-      expect(body).to.equal('Payment methods for cart 12');
-      done();
+describe("Cart page", function() {
+    it("check correct status code for correct url", function(done) {
+	request.get("http://localhost:7865/cart/12", function(err, res, body) {
+	    expect(res.statusCode).to.equal(200);
+	    done();
+	});
     });
-  });
-
-  it('should return 404 when :id is not a number', (done) => {
-    request('http://localhost:7865/cart/hello', (error, response) => {
-      expect(response.statusCode).to.equal(404);
-      done();
+    it("check correct content for correct url", function(done) {
+	request.get("http://localhost:7865/cart/12", function(err, res, body) {
+	    expect(body).to.contain("Payment methods for cart 12");
+	    done();
+	});
     });
-  });
+    it("check correct status code for incorrect url", function(done) {
+	request.get("http://localhost:7865/cart/kim", function(err, res, body) {
+	    expect(res.statusCode).to.equal(404);
+	    done();
+	});
+    });
 });
